@@ -25,4 +25,6 @@
 
 - You can use it by cloning the project and running the `Main.java` file.
 
+---
+
 ![App Image](image.png)
