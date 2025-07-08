@@ -26,7 +26,7 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Üst: URL barı
+        // URL bar
         JPanel topPanel = new JPanel();
         urlField = new JTextField(40);
         urlField.setForeground(Color.GRAY);
@@ -51,14 +51,14 @@ public class MainFrame extends JFrame {
         topPanel.add(new JLabel("URL: "));
         topPanel.add(urlField);
 
-        // Sol altta: Wordlist seçimi
+        // Wordlists
         String[] sizes = {"Small", "Medium", "Large"};
         wordlistSize = new JComboBox<>(sizes);
         JPanel wordlistPanel = new JPanel();
         wordlistPanel.add(new JLabel("Wordlist:"));
         wordlistPanel.add(wordlistSize);
 
-        // Sağda: HTTP kod filtreleme
+        //HTTP kod filtreleme
         JPanel codePanel = new JPanel();
         codePanel.setLayout(new BoxLayout(codePanel, BoxLayout.Y_AXIS));
         codePanel.setBorder(BorderFactory.createTitledBorder("HTTP Kod Filtrele"));
@@ -73,12 +73,12 @@ public class MainFrame extends JFrame {
             codePanel.add(Box.createVerticalStrut(5));
         }
 
-        // Alt: Çıktı ekranı
+        // output
         outputArea = new JTextArea();
         outputArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(outputArea);
 
-        // Butonlar
+        // butonlar
         startButton = new JButton("Başlat");
         pauseButton = new JButton("Durdur");
         restartButton = new JButton("Yeniden Başlat");
@@ -109,14 +109,14 @@ public class MainFrame extends JFrame {
             }
         });
 
-        // Alt panel (butonlar + wordlist)
+        //butonlar + wordlist
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         bottomPanel.add(wordlistPanel);
         bottomPanel.add(startButton);
         bottomPanel.add(pauseButton);
         bottomPanel.add(restartButton);
 
-        // Bileşenleri yerleştir
+        // components
         add(topPanel, BorderLayout.NORTH);
         add(codePanel, BorderLayout.EAST);
         add(scrollPane, BorderLayout.CENTER);
@@ -124,7 +124,7 @@ public class MainFrame extends JFrame {
 
         setVisible(true);
 
-        // Uygulama açılır açılmaz placeholder ayarla
+        // placeholder
         SwingUtilities.invokeLater(() -> {
             if (urlField.getText().isEmpty()) {
                 urlField.setForeground(Color.GRAY);
@@ -155,7 +155,7 @@ public class MainFrame extends JFrame {
             default -> throw new IllegalStateException("Beklenmeyen boyut: " + size);
         };
 
-        outputArea.setText(""); // ekranı temizle
+        outputArea.setText(""); // clear screen
 
         scanner = new Scanner(url, wordlistPath, selectedCodes, outputArea);
         scanThread = new Thread(scanner::start);
